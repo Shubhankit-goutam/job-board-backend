@@ -6,13 +6,17 @@ require("dotenv").config();
 const jobRoutes = require("./routes/jobs");
 
 const app = express();
-app.use(cors());
-app.use(express.json());
-app.use("/api/jobs", jobRoutes);
+
 
 app.use(cors({
-  origin: 'https://jobsboardsa.netlify.app'
+  origin: 'https://jobsboardsa.netlify.app',
+  credentials: true
 }));
+
+app.use(express.json());
+
+
+app.use("/api/jobs", jobRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => app.listen(5000, () => console.log("Server running on 5000")))
