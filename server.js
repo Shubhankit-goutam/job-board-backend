@@ -17,6 +17,9 @@ app.use(express.json());
 
 
 app.use("/api/jobs", jobRoutes);
+app.get("/test-cors", (req, res) => {
+  res.json({ message: "Speedhot CORS is working!" });
+});
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => app.listen(5000, () => console.log("Server running on 5000")))
